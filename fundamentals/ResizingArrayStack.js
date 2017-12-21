@@ -7,9 +7,11 @@
 
 const INIT_SIZE = 8;
 class ResizingArrayStack {
-    constructor(n) {
+    constructor(...args) {
+        let n = args[0] || INIT_SIZE;
+
         if(!isFinite(n)) {
-            throw new Error('Illegal Argument Error: argument must be number type');
+            throw new Error('Illegal Argument Error: argument must be finite number type');
         }
 
         if(n < INIT_SIZE) {
