@@ -16,6 +16,8 @@ for(let i = 0; i < 10; i++) {
 
 const size = 100000;
 
+console.log('original array elements');
+console.log(arr);
 
 let temp = arr.slice();
 console.log('\nknuth.shuffle');
