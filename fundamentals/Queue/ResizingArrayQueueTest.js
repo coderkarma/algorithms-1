@@ -95,7 +95,7 @@ console.timeEnd(`LibraryQueue enqueue(): ${SIZE} times`);
 
 console.time(`LibraryQueue dequeue(): ${SIZE} times`);
 while(libraryQ.length) {
-    libraryQ.shift();
+    libraryQ.pop();
 }
 console.timeEnd(`LibraryQueue dequeue(): ${SIZE} times`);
 
