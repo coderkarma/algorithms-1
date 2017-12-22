@@ -9,7 +9,7 @@ process.stdin.on('data', (data) => {
 
 process.stdin.on('end', () => {
 
-    const lines = input.split('\n');
+    const lines = input.trim().split('\n');
     console.log('number of lines: ' + lines.length);
 
     let i = 0;
