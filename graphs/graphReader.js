@@ -1,7 +1,7 @@
 'use strict';
 
 const fs = require('fs');
-const Graph = require('./undirected/Graph');
+const Graph = require('./undirected/unweighted/Graph');
 //const EdgeWeightedGraph = require('./undirected/');
 //const Digraph = require('./directed/');
 //const EdgeWeightedDigraph = require('./directed/');
