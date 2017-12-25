@@ -26,12 +26,14 @@ function asyncFnToPromiseFactory(asyncFn) {
 }
 
 
-function graphReader(filename) {
+function graphReader(directed, weighted, filename) {
     if(filename) {
         const fsPromiseFactory = asynFnToPromiseFactory(fs);
         const fsPromise = fsPromiseFactory(filename, 'utf8');
         
-        return fsPromise.then(buildGraph);
+        return fsPromise.then((g) => {
+            return buildGraph(g, directed, weighted);
+        });
     }
     
     let input = '';
@@ -44,21 +46,23 @@ function graphReader(filename) {
         process.stdin.on('end', () => {
             resolve(input);
         });
-    }).then(buildGraph);
+    }).then((g) => {
+        return buildGraph(g, directed, weighted);
+    });
 }
 
-function buildGraph(input) {
+function buildGraph(input, directed, weighted) {
     const lines = input.trim().split('\n');
-    const currLine = 0;
-    const sizeOfV = line[currLine++];
-    const sizeOfE = line[currLine++];
+    let currLine = 0;
+    const sizeOfV = lines[currLine++];
+    const sizeOfE = lines[currLine++];
 
     let g;
-    if(!direction && !edge) {
+    if(!directed && !weighted) {
         g = new Graph(sizeOfV);
-    } else if(!direction && edge) {
+    } else if(!directed && weighted) {
 //        g = new EdgeWeightedGraph(sizeOfV);
-    } else if(direction && !edge) {
+    } else if(directed && !weighted) {
 //        g = new Digraph(sizeOfV);
     } else {
 //        g = new EdgeWeightedDigraph(sizeOfV);
@@ -66,13 +70,13 @@ function buildGraph(input) {
 
     for(let i = 0; i < sizeOfE; i++) {
         const line = lines[currLine++].split(' ');
-        const v = line[0];
-        const w = line[1];
-        const e = line[2];
+        const v = parseInt(line[0]);
+        const w = parseInt(line[1]);
+        const e = parseFloat(line[2]);
         
-        if(!edge) {
+        if(!weighted) {
             g.addEdge(v, w);
-        } else if(!direction) {
+        } else if(!directed) {
 //            g.addEdge(new Edge(v, w, e));
         } else {
 //            g.addEdge(new DirectedEdge(v, w, e));
