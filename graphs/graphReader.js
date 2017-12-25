@@ -28,7 +28,7 @@ function asyncFnToPromiseFactory(asyncFn) {
 
 function graphReader(directed, weighted, filename) {
     if(filename) {
-        const fsPromiseFactory = asynFnToPromiseFactory(fs);
+        const fsPromiseFactory = asyncFnToPromiseFactory(fs.readFile);
         const fsPromise = fsPromiseFactory(filename, 'utf8');
         
         return fsPromise.then((g) => {
