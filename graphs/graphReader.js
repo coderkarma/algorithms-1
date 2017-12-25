@@ -54,8 +54,8 @@ function graphReader(directed, weighted, filename) {
 function buildGraph(input, directed, weighted) {
     const lines = input.trim().split('\n');
     let currLine = 0;
-    const sizeOfV = lines[currLine++];
-    const sizeOfE = lines[currLine++];
+    const sizeOfV = parseInt(lines[currLine++]);
+    const sizeOfE = parseInt(lines[currLine++]);
 
     let g;
     if(!directed && !weighted) {
