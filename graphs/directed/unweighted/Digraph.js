@@ -53,7 +53,7 @@ class Digraph {
 
     addEdge(v, w) {
         this._validate(v);
-        this._validate(2);
+        this._validate(w);
 
         //add directed edge v -> w
         this._adj[v].push(w);
