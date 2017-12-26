@@ -3,7 +3,7 @@
 const fs = require('fs');
 const Graph = require('./undirected/unweighted/Graph');
 //const EdgeWeightedGraph = require('./undirected/');
-//const Digraph = require('./directed/');
+const Digraph = require('./directed/unweighted/Digraph');
 //const EdgeWeightedDigraph = require('./directed/');
 
 
@@ -63,7 +63,7 @@ function buildGraph(input, directed, weighted) {
     } else if(!directed && weighted) {
 //        g = new EdgeWeightedGraph(sizeOfV);
     } else if(directed && !weighted) {
-//        g = new Digraph(sizeOfV);
+        g = new Digraph(sizeOfV);
     } else {
 //        g = new EdgeWeightedDigraph(sizeOfV);
     }
