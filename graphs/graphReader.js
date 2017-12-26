@@ -69,7 +69,7 @@ function buildGraph(input, directed, weighted) {
     }
 
     for(let i = 0; i < sizeOfE; i++) {
-        const line = lines[currLine++].split(' ');
+        const line = lines[currLine++].trim().split(/\s+/);
         const v = parseInt(line[0]);
         const w = parseInt(line[1]);
         const e = parseFloat(line[2]);
