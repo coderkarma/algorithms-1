@@ -2,21 +2,22 @@
 
 class Digraph {
     constructor(n) {
-        if(!isFinite(n) || n < 0) {
-            throw new Error('Illegal Argument Error: first arg must be non negative number');
+        if(!Number.isSafeInteger(n) || n < 0) {
+            throw new Error('Illegal Argument Error: first arg must be non-negative integer number');
         }
+
         this._V = n;
         this._E = 0;
         this._adj = new Array(n);
         this._indegree = new Array(n).fill(0);
         //initialize each vertex with its own container
-        for(let i = 0; i < n; i++) {
-            this._adj[i] = [];
+        for(let v = 0; v < n; v++) {
+            this._adj[v] = [];
         }
     }
 
     reverse() {
-        const n = g.V();
+        const n = this._V;
         const reverse = new Digraph(n);
         for(let v = 0; v < n; v++) {
             for(let w of this._adj[v]) {
@@ -26,31 +27,34 @@ class Digraph {
         return reverse;
     }
 
-    V() {
+    get V() {
         return this._V;
     }
 
-    E() {
+    get E() {
         return this._E;
     }
 
     adj(v) {
-        if(v < 0 || v >= this._V) {
-            throw new Error(`Index Out Of Bounds Error: arg is ${v}`);
-        }
+        this._validate(v);
 
         return this._adj[v][Symbol.iterator]();
     }
 
     outdegree(v) {
+        this._validate(v);
         return this._adj[v].length;
     }
 
     indegree(v) {
+        this._validate(v);
         return this._indegree[v];
     }
 
     addEdge(v, w) {
+        this._validate(v);
+        this._validate(2);
+
         //add directed edge v -> w
         this._adj[v].push(w);
         this._indegree[w]++;
@@ -59,7 +63,8 @@ class Digraph {
 
     toString() {
         let str = '';
-        const n = this._adj.length
+        str += `${this._V} vertices, ${this._E} edges\n`;
+        const n = this._V;
         for(let v = 0; v < n; v++) {
             str += `${v}:`;
             for(let w of this._adj[v]) {
@@ -69,6 +74,12 @@ class Digraph {
         }
         
         return str;
+    }
+
+    _validate(v) {
+        if(!Number.isSafeInteger(v) || v < 0 || v >= this._V) {
+            throw new Error(`Illegal Argument Error: ${v} must be between 0 <= v <= ${this._V - 1}`);
+        }
     }
 }
 
