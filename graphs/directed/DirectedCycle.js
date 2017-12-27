@@ -76,6 +76,10 @@ class DirectedCycle {
                     this._cycle.push(e);
                 }
                 this._cycle.push(e);
+
+                //this is due to array iterator start from 0 index
+                //we need to iterate from last index to 0 index
+                this._cycle.reverse();
             }
         }
 
@@ -87,7 +91,7 @@ class DirectedCycle {
     }
 
     hasCycle() {
-        return this._cycle;
+        return !!this._cycle;
     }
 }
 

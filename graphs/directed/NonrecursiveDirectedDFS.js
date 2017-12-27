@@ -60,7 +60,7 @@ class NonrecursiveDirectedDFS {
         return the collection of visited vertices form the source vertex
     */
     reachableV() {
-        return this._reachableV[Symbol.iterator]();
+        return this._reachableV;
     }
 
     _validate(v) {
