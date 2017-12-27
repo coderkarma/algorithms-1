@@ -46,7 +46,7 @@ class DepthFirstOrder {
 
     pre(v) {
         if(v === undefined) {
-            return this._preOrder[Symbol.iterator]();
+            return this._preOrder.slice();
         }
 
         this._validate(v);
@@ -55,7 +55,7 @@ class DepthFirstOrder {
 
     post(v) {
         if(v === undefined) {
-            return this._postOrder[Symbol.iterator]();
+            return this._postOrder.slice();
         }
 
         this._validate(v);
@@ -63,8 +63,7 @@ class DepthFirstOrder {
     }
 
     reversePost() {
-        const reverse = this._postOrder.slice().reverse();
-        return reverse[Symbol.iterator]();
+        return this._postOrder.slice().reverse();
     }
 
     _validate(v) {
