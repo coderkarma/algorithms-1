@@ -18,11 +18,13 @@ const arr5 = [];
 const arr5e = [];
 const arr6 = [];
 const arr6e = [];
-const SIZE = 10000;
+const arr7 = [];
+const arr7e = [];
+const SIZE = 100000;
 let i;
 for(i = 0; i < SIZE; i++) {
-    arr6[i] = arr5[i] = arr4[i] = arr3[i] = arr2[i] = arr1[i] = Math.floor(Math.random() * (SIZE / 3));
-    arr6e[i] = arr5e[i] = arr4e[i] = arr3e[i] = arr2e[i] = arr1e[i] = 0;
+    arr7[i] = arr6[i] = arr5[i] = arr4[i] = arr3[i] = arr2[i] = arr1[i] = Math.floor(Math.random() * (SIZE / 3));
+    arr7e[i] = arr6e[i] = arr5e[i] = arr4e[i] = arr3e[i] = arr2e[i] = arr1e[i] = 0;
 }
 
 const incComp = (x, y) => x - y;
@@ -134,16 +136,61 @@ quick3way(arr6e, incComp);
 console.timeEnd('quick3waySort arr6e increase order');
 console.log(`arr6e is sorted: ${sorted(arr6e, incComp)}`);
 
-/*
-const pq = new PQ((x, y) => y - x);//PQ(1, (x, y) => y - x);
-console.log(arr6);
-arr6.forEach((x) => {
+console.log();
+
+
+
+console.time('pqSort arr7 increase order');
+let pq = new PQ(incComp);
+arr7.forEach((x) => {
     pq.insert(x);
 });
+i = 0;
 
-while(!pq.isEmpty()) {
-    console.log(pq.remove());
+/*
+for(let x of pq) {
+    arr7[i++] = x;
 }
 */
+/*
+while(!pq.isEmpty()) {
+    arr7[i++] = pq.remove();
+}*/
+
+while(!pq.isEmpty()) {
+    arr7[i++] = pq.peek();
+    pq.remove();
+}
+
+console.timeEnd('pqSort arr7 increase order');
+console.log(`arr7 is sorted: ${sorted(arr7, incComp)}`);
+
+
+pq = new PQ(decComp);
+console.time('pqSort arr7 decrease order');
+arr7.forEach((x) => {
+    pq.insert(x);
+});
+i = 0;
+while(!pq.isEmpty()) {
+    arr7[i++] = pq.remove();
+}
+console.timeEnd('pqSort arr7 decrease order');
+console.log(`arr7 is sorted: ${sorted(arr7, decComp)}`);
+
+
+
+console.time('pqSort arr7e increase order');
+pq = new PQ(incComp);
+arr7e.forEach((x) => {
+    pq.insert(x);
+});
+i = 0;
+while(!pq.isEmpty()) {
+    arr7e[i++] = pq.remove();
+}
+console.timeEnd('pqSort arr7e increase order');
+console.log(`arr7e is sorted: ${sorted(arr7e, incComp)}`);
+
 
 

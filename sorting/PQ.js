@@ -1,6 +1,6 @@
 'use strict';
 
-const INIT_SIZE = 8;
+const INIT_SIZE = 15;
 const INIT_COMP = (x, y) => x - y;
 
 class PQ {
@@ -10,7 +10,7 @@ class PQ {
             n = INIT_SIZE;
         }
         
-        if(!isFinite(n) || n < INIT_SIZE) {
+        if(Number.isSafeInteger(n) || n < INIT_SIZE) {
             n = INIT_SIZE;
         }
 
@@ -20,7 +20,7 @@ class PQ {
 
         this._keys = new Array(n + 1);
         this._size = 0;
-        this._comp = comp || ((x, y) => x - y);
+        this._comp = comp;
     }
 
     size() {
@@ -62,7 +62,19 @@ class PQ {
         return key;
     }
 
-    [Symbol.iterator]() {}
+    [Symbol.iterator]() {
+        const copy = new PQ(this._size, this._comp);
+        for(let i = 1; i <= this._size; i++) {
+            copy.insert(this._keys[i]);
+        }
+
+        return {
+            next() {
+                let done = copy.isEmpty();
+                return {value: copy.remove(), done: done};
+            }
+        }
+    }
 
     _resize(n) {
         const temp = new Array(n);
