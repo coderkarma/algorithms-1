@@ -10,7 +10,7 @@ class PQ {
             n = INIT_SIZE;
         }
         
-        if(Number.isSafeInteger(n) || n < INIT_SIZE) {
+        if(!Number.isSafeInteger(n) || n < INIT_SIZE) {
             n = INIT_SIZE;
         }
 
