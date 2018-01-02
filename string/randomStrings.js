@@ -46,5 +46,3 @@ function randomStrings(size, start, end) {
 }
 
 module.exports = randomStrings;
-
-console.log(randomStrings(10, -5000, 100));
