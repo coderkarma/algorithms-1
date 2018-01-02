@@ -31,8 +31,8 @@ class KMP {
         }
 
         let i, j;
-        const n = this._patt.length;
-        const m = txt.length;
+        const m = this._patt.length;
+        const n = txt.length;
         for(i = 0, j = 0; i < n && j < m; i++) {
             j = this._dfa[txt.charCodeAt(i)][j];
         }
