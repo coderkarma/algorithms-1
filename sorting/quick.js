@@ -1,6 +1,6 @@
 'use strict';
 
-const knuth = require('../fundamentals/Random/knuth');
+const knuth = require('../fundamentals/random/knuth');
 
 
 function sort(arr, comp) {
